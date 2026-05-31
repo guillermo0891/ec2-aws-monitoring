@@ -17,7 +17,7 @@ ansible/ \
 └── playbook.yml \
     ├── roles/ \
         └── prometheus/ (tasks, templates, files) \
-        └── grafana/ (tasks, templates, files) \
+        └── grafana/ (tasks, templates, files) 
 
 # Prerequisites
 - AWS credentials configured (env or profile)
