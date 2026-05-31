@@ -15,9 +15,9 @@ ansible/ \
 └── inventory.ini.example \
 └── generate_inventory.sh \
 └── playbook.yml \
-├── roles/ \
-    └── prometheus/ (tasks, templates, files) \
-    └── grafana/ (tasks, templates, files) \
+    ├── roles/ \
+        └── prometheus/ (tasks, templates, files) \
+        └── grafana/ (tasks, templates, files) \
 
 # Prerequisites
 - AWS credentials configured (env or profile)
