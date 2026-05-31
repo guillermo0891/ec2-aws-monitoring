@@ -45,19 +45,19 @@ cd ansible ./generate_inventory.sh ../tf_outputs.json ~/.ssh/YOUR_KEY.pem > inve
 sudo apt update && sudo apt install -y python3 python3-venv python3-pip ssh jq python3 -m venv ~/ansible-venv source ~/ansible-venv/bin/activate pip install --upgrade pip pip install ansible
 ```
 6. Ensure remote Python >= 3.8:
-7. Example for Amazon Linux 2
+Example for Amazon Linux 2
 ```code
 sudo yum install -y python38
 ```
-8. Set in inventory or group_vars:
+7. Set in inventory or group_vars:
 ```code
 ansible_python_interpreter=/usr/bin/python3.8
 ```
-9. Test connectivity: 
+8. Test connectivity: 
 ```code
 ansible -i inventory.ini all -m ping -u ec2-user --private-key ~/.ssh/YOUR_KEY.pem
 ```
-10. Run playbook:
+9. Run playbook:
 ```code 
 ansible-playbook -i inventory.ini playbook.yml -u ec2-user --private-key ~/.ssh/YOUR_KEY.pem
 ```
@@ -82,6 +82,15 @@ terraform destroy -var="key_name=YOUR_KEY" -auto-approve
 Change AMI lookup to use Amazon Linux 2023 via data.aws_ami or SSM parameter (recommended).
 Use private subnets + bastion for production.
 Switch Prometheus/Grafana to containers (Docker/ECS) if preferred.
+
+
+# Prometheus
+
+![alt text](prometheus.JPG)
+
+# Grafana
+
+![alt text](grafana.JPG)
 
 # License
 MIT
