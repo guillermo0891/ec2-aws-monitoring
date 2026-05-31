@@ -6,18 +6,18 @@ Terraform + Ansible project to provision AWS EC2 instances and configure Prometh
 
 # Contents
 terraform/
-    providers.tf
-    variables.tf
-    security.tf
-    main.tf
-    outputs.tf
+└── providers.tf
+└── variables.tf
+└── security.tf
+└── main.tf
+└── outputs.tf
 ansible/
-    inventory.ini.example
-    generate_inventory.sh
-    playbook.yml
-    roles/
-        prometheus/ (tasks, templates, files)
-        grafana/ (tasks, templates, files)
+└── inventory.ini.example
+└── generate_inventory.sh
+└── playbook.yml
+├── roles/
+    └── prometheus/ (tasks, templates, files)
+    └── grafana/ (tasks, templates, files)
 
 # Prerequisites
 - AWS credentials configured (env or profile)
