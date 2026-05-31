@@ -1,0 +1,12 @@
+[Unit]
+Description=Grafana
+After=network.target
+
+[Service]
+User=grafana
+Group=grafana
+ExecStart=/usr/share/grafana/bin/grafana-server --homepath=/usr/share/grafana --config=/usr/share/grafana/conf/custom.ini
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

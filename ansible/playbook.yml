@@ -1,0 +1,36 @@
+---
+- name: Prometheus and Grafana
+  hosts: promgraf
+  become: yes
+  roles:
+    - prometheus
+    - grafana
+
+- name: Node Exporter
+  hosts: targets
+  become: yes
+  tasks:
+    - name: Install node_exporter (download latest binary)
+      become: yes
+      shell: |
+        set -e
+        ver="1.6.1"
+        tmpdir=$(mktemp -d)
+        curl -sSL "https://github.com/prometheus/node_exporter/releases/download/v${ver}/node_exporter-${ver}.linux-amd64.tar.gz" -o ${tmpdir}/ne.tar.gz
+        tar xzf ${tmpdir}/ne.tar.gz -C ${tmpdir}
+        sudo mv ${tmpdir}/node_exporter-${ver}.linux-amd64/node_exporter /usr/local/bin/
+        id -u nodeusr || sudo useradd -M -r -s /bin/false nodeusr
+        cat <<'SERVICE' | sudo tee /etc/systemd/system/node_exporter.service
+        [Unit]
+        Description=Node Exporter
+        After=network.target
+
+        [Service]
+        User=nodeusr
+        ExecStart=/usr/local/bin/node_exporter
+
+        [Install]
+        WantedBy=default.target
+        SERVICE
+        sudo systemctl daemon-reload
+        sudo systemctl enable --now node_exporter
